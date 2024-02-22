@@ -20,24 +20,29 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.project.h.s.objectrecognitionsdk.ObjectRecognitionSDKInterface
 import com.project.h.s.objectrecognitionsdkapplication.ui.theme.ObjectRecognitionSDKApplicationTheme
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ObjectRecognitionSDKActivity : ComponentActivity() {
+
+    @Inject
+    lateinit var objectRecognitionSDKInterface: ObjectRecognitionSDKInterface
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ObjectRecognitionSDKApplicationTheme {
-                SdkInitializeScreen()
+                SdkInitializeScreen(objectRecognitionSDKInterface)
             }
         }
     }
 }
 
 @Composable
-fun SdkInitializeScreen() {
+fun SdkInitializeScreen(objectRecognitionSDKInterface: ObjectRecognitionSDKInterface? = null) {
     val context = LocalContext.current
 
     Box(
@@ -53,7 +58,7 @@ fun SdkInitializeScreen() {
                 .background(MaterialTheme.colorScheme.primary, shape = CircleShape)
                 .align(Alignment.Center),
             onClick = {
-               //TODO: Initialize SDK
+                objectRecognitionSDKInterface?.initialize(context = context)
             }
         ) {
             Text(color = MaterialTheme.colorScheme.onPrimary, text = "Initialize SDK")

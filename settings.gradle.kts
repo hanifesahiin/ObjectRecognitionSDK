@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "ObjectRecognitionSDKApplication"
 include(":app")
+include(":ObjectRecognitionSDK")
