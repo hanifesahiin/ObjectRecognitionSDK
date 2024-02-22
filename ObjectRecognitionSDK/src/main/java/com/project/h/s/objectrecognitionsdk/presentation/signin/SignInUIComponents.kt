@@ -27,10 +27,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
-import com.project.h.s.objectrecognitionsdk.theme.grey
+import com.project.h.s.objectrecognitionsdk.R
 import com.project.h.s.objectrecognitionsdk.presentation.userlist.UserListActivity
+import com.project.h.s.objectrecognitionsdk.theme.Dimension
+import com.project.h.s.objectrecognitionsdk.theme.grey
 import com.project.h.s.objectrecognitionsdk.theme.typography
 
 @Composable
@@ -43,9 +46,9 @@ fun SignInBox(checkbox: Boolean, onCheckedChange: (Boolean) -> Unit, onSignInAct
         val (surface, text) = createRefs()
 
         Text(
-            text = "KULLANICI GİRİŞİ",
+            text = stringResource(id = R.string.user_sign_in),
             modifier = Modifier.constrainAs(text) {
-                bottom.linkTo(surface.top, margin = 16.dp)
+                bottom.linkTo(surface.top, margin = Dimension.margin_16)
                 start.linkTo(parent.start)
                 end.linkTo(parent.end)
             },
@@ -63,8 +66,8 @@ fun SignInBox(checkbox: Boolean, onCheckedChange: (Boolean) -> Unit, onSignInAct
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                 }
-                .padding(start = 10.dp, end = 10.dp),
-            shape = RoundedCornerShape(10.dp)
+                .padding(start = Dimension.margin_10, end = Dimension.margin_10),
+            shape = RoundedCornerShape(Dimension.round_10)
         ) {
             Column(
                 modifier = Modifier
@@ -73,25 +76,29 @@ fun SignInBox(checkbox: Boolean, onCheckedChange: (Boolean) -> Unit, onSignInAct
                     .defaultMinSize(minHeight = 300.dp)
                     .background(Color.White)
             ) {
-                Spacer(modifier = Modifier.height(30.dp))
+                Spacer(modifier = Modifier.height(Dimension.margin_30))
 
                 OutlinedTextField(
                     modifier = Modifier
                         .fillMaxWidth()
                         .align(Alignment.CenterHorizontally)
-                        .padding(start = 10.dp, end = 10.dp),
+                        .padding(start = Dimension.margin_10, end = Dimension.margin_10),
                     value = "",
                     onValueChange = {},
-                    label = { Text(text = "Kullanıcı Adı") }
+                    label = { Text(text = stringResource(id = R.string.user_name)) }
                 )
                 OutlinedTextField(
                     modifier = Modifier
                         .fillMaxWidth()
                         .align(Alignment.CenterHorizontally)
-                        .padding(top = 10.dp, start = 10.dp, end = 10.dp),
+                        .padding(
+                            top = Dimension.margin_10,
+                            start = Dimension.margin_10,
+                            end = Dimension.margin_10
+                        ),
                     value = "",
                     onValueChange = {},
-                    label = { Text(text = "Şifre") }
+                    label = { Text(text = stringResource(R.string.password)) }
                 )
 
                 Row(
@@ -120,19 +127,19 @@ fun SignInBox(checkbox: Boolean, onCheckedChange: (Boolean) -> Unit, onSignInAct
                 Surface(
                     modifier = Modifier
                         .align(Alignment.CenterHorizontally)
-                        .padding(top = 15.dp),
+                        .padding(top = Dimension.margin_15),
                     color = Color.Black,
                     shape = RoundedCornerShape(0, 15, 0, 15),
                 ) {
                     Box(
                         modifier = Modifier
-                            .width(150.dp)
-                            .height(40.dp)
+                            .width(Dimension.width_150)
+                            .height(Dimension.height_40)
                             .clickable { onSignInAction() }
                     ) {
                         Text(
                             modifier = Modifier.align(Alignment.Center),
-                            text = "Giriş Yap",
+                            text = stringResource(id = R.string.sign_in),
                             color = Color.White,
                             style = typography.bodyMedium
                         )
