@@ -73,7 +73,7 @@ fun SignInBox(checkbox: Boolean, onCheckedChange: (Boolean) -> Unit, onSignInAct
                 modifier = Modifier
                     .fillMaxWidth()
                     .wrapContentHeight()
-                    .defaultMinSize(minHeight = 300.dp)
+                    .defaultMinSize(minHeight = Dimension.height_300)
                     .background(Color.White)
             ) {
                 Spacer(modifier = Modifier.height(Dimension.margin_30))

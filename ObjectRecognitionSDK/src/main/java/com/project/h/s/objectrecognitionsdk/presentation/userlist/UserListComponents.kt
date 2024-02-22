@@ -20,8 +20,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import com.project.h.s.objectrecognitionsdk.R
+import com.project.h.s.objectrecognitionsdk.theme.Dimension
 import com.project.h.s.objectrecognitionsdk.theme.green
 import com.project.h.s.objectrecognitionsdk.theme.grey
 import com.project.h.s.objectrecognitionsdk.theme.typography
@@ -36,9 +39,9 @@ fun UserListContainer(clickedItem: () -> Unit) {
         val (surface, text) = createRefs()
 
         Text(
-            text = "Onay Bekleyen\nKullanıcılar",
+            text = stringResource(id = R.string.users_waiting_for_approval),
             modifier = Modifier.constrainAs(text) {
-                bottom.linkTo(surface.top, margin = 16.dp)
+                bottom.linkTo(surface.top, margin = Dimension.margin_16)
                 start.linkTo(parent.start)
                 end.linkTo(parent.end)
             },
@@ -55,17 +58,18 @@ fun UserListContainer(clickedItem: () -> Unit) {
                     bottom.linkTo(parent.bottom)
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
-                }.background(Color.White)
-                .padding(start = 10.dp, end = 10.dp),
-            shape = RoundedCornerShape(20.dp)
+                }
+                .background(Color.White)
+                .padding(start = Dimension.margin_10, end = Dimension.margin_10),
+            shape = RoundedCornerShape(Dimension.round_20)
         ) {
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(Dimension.margin_10))
 
             LazyColumn(
                 modifier = Modifier
                     .fillMaxWidth()
                     .wrapContentHeight()
-                    .defaultMinSize(minHeight = 300.dp)
+                    .defaultMinSize(minHeight = Dimension.height_300)
                     .background(Color.White)
             ) {
                 items(listOf<String>("")) {
@@ -84,7 +88,11 @@ fun ListItem(onClick: () -> Unit) {
         modifier = Modifier
             .wrapContentSize()
             .fillMaxWidth()
-            .padding(top = 10.dp, start = 15.dp, end = 20.dp)
+            .padding(
+                top = Dimension.margin_10,
+                start = Dimension.margin_15,
+                end = Dimension.margin_20
+            )
     ) {
         val (text, button, line) = createRefs()
 
@@ -95,7 +103,7 @@ fun ListItem(onClick: () -> Unit) {
                     top.linkTo(parent.top)
                     bottom.linkTo(parent.bottom)
                 },
-            text = "Mail",
+            text = "",
             color = Color.Black,
             style = typography.bodyMedium
         )
@@ -106,12 +114,12 @@ fun ListItem(onClick: () -> Unit) {
                 .constrainAs(button) {
                     end.linkTo(parent.end)
                     top.linkTo(parent.top)
-                    bottom.linkTo(parent.bottom, margin = 10.dp)
+                    bottom.linkTo(parent.bottom, margin = Dimension.margin_10)
                 },
             shape = RoundedCornerShape(10),
             colors = ButtonDefaults.buttonColors(containerColor = green)
         ) {
-            Text("Onayla")
+            Text(stringResource(id = R.string.confirm))
         }
 
         Divider(
