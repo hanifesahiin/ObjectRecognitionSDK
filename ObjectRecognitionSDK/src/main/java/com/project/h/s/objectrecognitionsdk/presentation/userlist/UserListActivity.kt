@@ -4,6 +4,7 @@ import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,9 +21,13 @@ class UserListActivity : ComponentActivity() {
 
 @Composable
 fun UserListScreen() {
+    Surface {
+        UserListContainer {}
+    }
 }
 
 @Preview(uiMode = Configuration.UI_MODE_TYPE_NORMAL)
 @Composable
 fun Review() {
+    UserListContainer({})
 }
