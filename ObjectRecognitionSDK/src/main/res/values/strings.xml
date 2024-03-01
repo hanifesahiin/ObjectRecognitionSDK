@@ -7,4 +7,9 @@
     <string name="users_waiting_for_approval">Onay Bekleyen Kullanıcılar</string>
     <string name="sign_in_error_message">Bir hata ile karşılaşıldı</string>
     <string name="logout">Çıkış</string>
+    <string name="complete">Bitir</string>
+    <string name="user_camera_description">Uygulamanın temel fonksiyonlarından camerayı kullanmak için izni onaylayın</string>
+    <string name="camera">Camera</string>
+    <string name="allow">İzin ver</string>
+    <string name="captured_object">Yakalanan Obje</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.project.h.s.objectrecognitionsdk.presentation.userlist
 
 import android.content.Context
+import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
@@ -29,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.project.h.s.objectrecognitionsdk.R
 import com.project.h.s.objectrecognitionsdk.domain.entities.UserItem
+import com.project.h.s.objectrecognitionsdk.presentation.captureimage.CaptureImageActivity
 import com.project.h.s.objectrecognitionsdk.theme.Dimension
 import com.project.h.s.objectrecognitionsdk.theme.green
 import com.project.h.s.objectrecognitionsdk.theme.grey
@@ -160,6 +162,12 @@ fun ListItem(item: UserItem, onClick: (Int) -> Unit) {
 }
 
 fun Context.startCaptureImageActivity() {
+    val intent = Intent()
+    intent.setClass(this, CaptureImageActivity::class.java)
+    intent.setAction(CaptureImageActivity::class.java.getName())
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+    this.startActivity(intent)
 }
 
 fun Context.startReadIdCardActivity() {
