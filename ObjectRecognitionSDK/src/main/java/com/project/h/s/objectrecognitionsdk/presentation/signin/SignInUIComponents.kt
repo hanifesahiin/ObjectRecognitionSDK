@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -25,6 +24,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -33,11 +33,18 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import com.project.h.s.objectrecognitionsdk.R
 import com.project.h.s.objectrecognitionsdk.presentation.userlist.UserListActivity
 import com.project.h.s.objectrecognitionsdk.theme.Dimension
+import com.project.h.s.objectrecognitionsdk.theme.ROUND_15
 import com.project.h.s.objectrecognitionsdk.theme.grey
 import com.project.h.s.objectrecognitionsdk.theme.typography
 
 @Composable
-fun SignInBox(checkbox: Boolean, onCheckedChange: (Boolean) -> Unit, onSignInAction: () -> Unit) {
+fun SignInBox(
+    onEmailChange: (String) -> Unit,
+    onPasswordChange: (String) -> Unit,
+    onCheckedChange: (Boolean) -> Unit,
+    onSignInAction: () -> Unit,
+    state: SignInViewModel.UIFlow
+) {
     ConstraintLayout(
         modifier = Modifier
             .fillMaxSize()
@@ -72,8 +79,7 @@ fun SignInBox(checkbox: Boolean, onCheckedChange: (Boolean) -> Unit, onSignInAct
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .wrapContentHeight()
-                    .defaultMinSize(minHeight = Dimension.height_300)
+                    .height(Dimension.height_300)
                     .background(Color.White)
             ) {
                 Spacer(modifier = Modifier.height(Dimension.margin_30))
@@ -83,8 +89,8 @@ fun SignInBox(checkbox: Boolean, onCheckedChange: (Boolean) -> Unit, onSignInAct
                         .fillMaxWidth()
                         .align(Alignment.CenterHorizontally)
                         .padding(start = Dimension.margin_10, end = Dimension.margin_10),
-                    value = "",
-                    onValueChange = {},
+                    value = state.userName,
+                    onValueChange = { onEmailChange(it) },
                     label = { Text(text = stringResource(id = R.string.user_name)) }
                 )
                 OutlinedTextField(
@@ -96,8 +102,8 @@ fun SignInBox(checkbox: Boolean, onCheckedChange: (Boolean) -> Unit, onSignInAct
                             start = Dimension.margin_10,
                             end = Dimension.margin_10
                         ),
-                    value = "",
-                    onValueChange = {},
+                    value = state.password,
+                    onValueChange = { onPasswordChange(it) },
                     label = { Text(text = stringResource(R.string.password)) }
                 )
 
@@ -105,7 +111,7 @@ fun SignInBox(checkbox: Boolean, onCheckedChange: (Boolean) -> Unit, onSignInAct
                     modifier = Modifier
                         .wrapContentSize()
                         .align(Alignment.End)
-                        .clickable { onCheckedChange(!checkbox) },
+                        .clickable { onCheckedChange(!state.checked) },
                     horizontalArrangement = Arrangement.spacedBy(0.dp)
                 ) {
                     Text(
@@ -119,26 +125,31 @@ fun SignInBox(checkbox: Boolean, onCheckedChange: (Boolean) -> Unit, onSignInAct
                         modifier = Modifier
                             .scale(0.8f, 0.8f)
                             .alignByBaseline(),
-                        checked = checkbox,
+                        checked = state.checked,
                         onCheckedChange = { isChecked -> onCheckedChange(isChecked) }
                     )
                 }
 
+                val enabled = state.userName.isNotEmpty() && state.password.isNotEmpty()
+
                 Surface(
                     modifier = Modifier
                         .align(Alignment.CenterHorizontally)
-                        .padding(top = Dimension.margin_15),
+                        .padding(top = Dimension.margin_15)
+                        .alpha(if (enabled) 1.0f else 0.8f),
                     color = Color.Black,
-                    shape = RoundedCornerShape(0, 15, 0, 15),
+                    shape = RoundedCornerShape(0, ROUND_15, 0, ROUND_15),
                 ) {
                     Box(
                         modifier = Modifier
                             .width(Dimension.width_150)
                             .height(Dimension.height_40)
-                            .clickable { onSignInAction() }
+                            .clickable { if (enabled) onSignInAction() }
                     ) {
                         Text(
-                            modifier = Modifier.align(Alignment.Center),
+                            modifier = Modifier
+                                .align(Alignment.Center)
+                                .alpha(if (enabled) 1.0f else 0.8f),
                             text = stringResource(id = R.string.sign_in),
                             color = Color.White,
                             style = typography.bodyMedium
