@@ -15,4 +15,7 @@ class SharedPreferenceUseCase(private val sharedPreference: UserSharedPreference
     fun getUserName() = sharedPreference.getUserName()
     fun getPassword() = sharedPreference.getPassword()
     fun getChecked() = sharedPreference.getChecked()
+    fun clearToken() {
+        sharedPreference.saveToken("")
+    }
 }

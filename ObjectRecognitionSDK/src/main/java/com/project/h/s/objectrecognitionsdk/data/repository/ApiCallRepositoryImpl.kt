@@ -3,6 +3,7 @@ package com.project.h.s.objectrecognitionsdk.data.repository
 import com.google.gson.Gson
 import com.project.h.s.objectrecognitionsdk.data.api.JsonPlaceHolderApiCall
 import com.project.h.s.objectrecognitionsdk.data.entities.LoginUserResponse
+import com.project.h.s.objectrecognitionsdk.data.entities.UserItemResponse
 import com.project.h.s.objectrecognitionsdk.domain.model.LoginUserModel
 import com.project.h.s.objectrecognitionsdk.domain.repository.ApiCallRepository
 import com.project.h.s.objectrecognitionsdk.utils.Logger
@@ -40,6 +41,13 @@ class ApiCallRepositoryImpl @Inject constructor(private val jsonPlaceHolderApiCa
                     Logger.e(_apiCallRepositoryImpl, "login", e)
                 }
             }
+        }
+    }
+
+    override fun allUser(token: String): Flow<List<UserItemResponse>> {
+        return flow {
+            val response = jsonPlaceHolderApiCall.allUser(token)
+            emit(response)
         }
     }
 

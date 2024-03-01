@@ -1,89 +1,105 @@
 package com.project.h.s.objectrecognitionsdk.presentation.userlist
 
+import android.content.Context
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.project.h.s.objectrecognitionsdk.R
+import com.project.h.s.objectrecognitionsdk.domain.entities.UserItem
 import com.project.h.s.objectrecognitionsdk.theme.Dimension
 import com.project.h.s.objectrecognitionsdk.theme.green
 import com.project.h.s.objectrecognitionsdk.theme.grey
 import com.project.h.s.objectrecognitionsdk.theme.typography
 
 @Composable
-fun UserListContainer(clickedItem: () -> Unit) {
+fun UserListContainer(
+    list: List<UserItem>,
+    progressIndicator: Boolean,
+    clickedItem: (Int) -> Unit
+) {
     ConstraintLayout(
         modifier = Modifier
             .fillMaxSize()
             .background(grey)
     ) {
-        val (surface, text) = createRefs()
+        val (surface, text, progress) = createRefs()
 
         Text(
             text = stringResource(id = R.string.users_waiting_for_approval),
-            modifier = Modifier.constrainAs(text) {
-                bottom.linkTo(surface.top, margin = Dimension.margin_16)
-                start.linkTo(parent.start)
-                end.linkTo(parent.end)
-            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .constrainAs(text) {
+                    bottom.linkTo(surface.top, margin = Dimension.margin_16)
+                }
+                .padding(start = Dimension.margin_10, end = Dimension.margin_10),
+            textAlign = TextAlign.Center,
             color = Color.White,
             style = typography.titleLarge
         )
 
         Surface(
             modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentHeight()
+                .wrapContentSize()
                 .constrainAs(surface) {
                     top.linkTo(parent.top)
                     bottom.linkTo(parent.bottom)
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                 }
-                .background(Color.White)
                 .padding(start = Dimension.margin_10, end = Dimension.margin_10),
             shape = RoundedCornerShape(Dimension.round_20)
         ) {
             Spacer(modifier = Modifier.height(Dimension.margin_10))
+            val listState = rememberLazyListState()
 
             LazyColumn(
                 modifier = Modifier
+                    .height(Dimension.height_300)
                     .fillMaxWidth()
-                    .wrapContentHeight()
-                    .defaultMinSize(minHeight = Dimension.height_300)
-                    .background(Color.White)
+                    .background(Color.White),
+                state = listState
             ) {
-                items(listOf<String>("")) {
-                    ListItem {
-                        clickedItem()
+                items(list) { item ->
+                    ListItem(item) {
+                        clickedItem(it)
                     }
                 }
             }
+        }
+
+        if (progressIndicator) {
+            CircularProgressIndicator(modifier = Modifier.constrainAs(progress) {
+                centerTo(surface)
+            })
         }
     }
 }
 
 @Composable
-fun ListItem(onClick: () -> Unit) {
+fun ListItem(item: UserItem, onClick: (Int) -> Unit) {
     ConstraintLayout(
         modifier = Modifier
             .wrapContentSize()
@@ -94,21 +110,32 @@ fun ListItem(onClick: () -> Unit) {
                 end = Dimension.margin_20
             )
     ) {
-        val (text, button, line) = createRefs()
+        val (textId, button, line) = createRefs()
 
-        Text(
+        val text = "${item.id} ${item.name} ${item.email}"
+        Box(
             modifier = Modifier
-                .constrainAs(text) {
+                .fillMaxSize()
+                .constrainAs(textId) {
                     start.linkTo(parent.start)
                     top.linkTo(parent.top)
                     bottom.linkTo(parent.bottom)
-                },
-            text = "",
-            color = Color.Black,
-            style = typography.bodyMedium
-        )
+                }
+        ) {
+            Text(
+                modifier = Modifier
+                    .wrapContentSize()
+                    .align(Alignment.TopStart),
+                textAlign = TextAlign.Start,
+                maxLines = 2,
+                text = text,
+                color = Color.Black,
+                style = typography.bodySmall
+            )
+        }
+
         Button(
-            onClick = { onClick() },
+            onClick = { onClick(item.id) },
             modifier = Modifier
                 .wrapContentSize()
                 .constrainAs(button) {
@@ -130,4 +157,10 @@ fun ListItem(onClick: () -> Unit) {
             thickness = 1.dp
         )
     }
+}
+
+fun Context.startCaptureImageActivity() {
+}
+
+fun Context.startReadIdCardActivity() {
 }
