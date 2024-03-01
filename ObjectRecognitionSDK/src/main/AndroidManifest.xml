@@ -20,5 +20,16 @@
         <activity
             android:name="com.project.h.s.objectrecognitionsdk.presentation.captureimage.CaptureImageActivity"
             android:exported="false"/>
+        <activity
+            android:name="com.project.h.s.objectrecognitionsdk.presentation.readidcard.ReadIdCardActivity"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.nfc.action.TAG_DISCOVERED"/>
+            </intent-filter>
+
+            <meta-data android:name="android.nfc.action.TECH_DISCOVERED"
+                android:resource="@xml/nfc_tech_filter" />
+        </activity>
     </application>
 </manifest>
