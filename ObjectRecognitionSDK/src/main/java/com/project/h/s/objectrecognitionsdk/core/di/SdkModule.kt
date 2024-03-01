@@ -1,7 +1,8 @@
-package com.project.h.s.objectrecognitionsdk.di
+package com.project.h.s.objectrecognitionsdk.core.di
 
 import com.project.h.s.objectrecognitionsdk.ObjectRecognitionSDKInterface
 import com.project.h.s.objectrecognitionsdk.ObjectRecognitionSDKInterfaceImpl
+import com.project.h.s.objectrecognitionsdk.data.UserSharedPreference
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,7 +14,7 @@ import javax.inject.Singleton
 object SdkModule {
     @Provides
     @Singleton
-    fun provideObjectRecognitionSDKInterface(): ObjectRecognitionSDKInterface {
-        return ObjectRecognitionSDKInterfaceImpl()
+    fun provideObjectRecognitionSDKInterface(sharedPreference: UserSharedPreference): ObjectRecognitionSDKInterface {
+        return ObjectRecognitionSDKInterfaceImpl(sharedPreference)
     }
 }
