@@ -8,8 +8,14 @@
     <string name="sign_in_error_message">Bir hata ile karşılaşıldı</string>
     <string name="logout">Çıkış</string>
     <string name="complete">Bitir</string>
+    <string name="read_nfc">NFC OKUT</string>
+    <string name="ad">Ad: %s</string>
+    <string name="soyad">Soyad: %s</string>
     <string name="user_camera_description">Uygulamanın temel fonksiyonlarından camerayı kullanmak için izni onaylayın</string>
     <string name="camera">Camera</string>
     <string name="allow">İzin ver</string>
     <string name="captured_object">Yakalanan Obje</string>
+    <string name="NFC_not_found">NFC özelliği etkin değil veya cihazda NFC donanımı yok</string>
+    <string name="tag_null">Tag Null</string>
+    <string name="NFC_found">NFC özelliği etkindir, işlemlere devam edebilirsiniz</string>
 </resources>

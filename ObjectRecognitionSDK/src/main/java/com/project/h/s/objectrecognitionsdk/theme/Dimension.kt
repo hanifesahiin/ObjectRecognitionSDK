@@ -6,6 +6,7 @@ const val ROUND_15 = 15
 const val ROUND_20 = 20
 
 object Dimension {
+    val margin_5 = 5.dp
     val margin_10 = 10.dp
     val margin_15 = 15.dp
     val margin_16 = 16.dp

@@ -31,6 +31,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import com.project.h.s.objectrecognitionsdk.R
 import com.project.h.s.objectrecognitionsdk.domain.entities.UserItem
 import com.project.h.s.objectrecognitionsdk.presentation.captureimage.CaptureImageActivity
+import com.project.h.s.objectrecognitionsdk.presentation.readidcard.ReadIdCardActivity
 import com.project.h.s.objectrecognitionsdk.theme.Dimension
 import com.project.h.s.objectrecognitionsdk.theme.green
 import com.project.h.s.objectrecognitionsdk.theme.grey
@@ -171,4 +172,9 @@ fun Context.startCaptureImageActivity() {
 }
 
 fun Context.startReadIdCardActivity() {
+    val intent = Intent()
+    intent.setClass(this, ReadIdCardActivity::class.java)
+    intent.setAction(ReadIdCardActivity::class.java.getName())
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    this.startActivity(intent)
 }
