@@ -56,7 +56,8 @@ kapt {
 }
 
 dependencies {
-    implementation(project(":ObjectRecognitionSDK"))
+   // implementation(project(":ObjectRecognitionSDK"))
+    implementation (files("libs/ObjectRecognitionSDK-release.aar"))
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
