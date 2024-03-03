@@ -27,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -36,6 +37,7 @@ import com.project.h.s.objectrecognitionsdk.theme.Dimension
 import com.project.h.s.objectrecognitionsdk.theme.ROUND_15
 import com.project.h.s.objectrecognitionsdk.theme.grey
 import com.project.h.s.objectrecognitionsdk.theme.typography
+import com.project.h.s.objectrecognitionsdk.utils.TestTags
 
 @Composable
 fun SignInBox(
@@ -54,11 +56,13 @@ fun SignInBox(
 
         Text(
             text = stringResource(id = R.string.user_sign_in),
-            modifier = Modifier.constrainAs(text) {
-                bottom.linkTo(surface.top, margin = Dimension.margin_16)
-                start.linkTo(parent.start)
-                end.linkTo(parent.end)
-            },
+            modifier = Modifier
+                .constrainAs(text) {
+                    bottom.linkTo(surface.top, margin = Dimension.margin_16)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                }
+                .testTag(TestTags.user_sign_in_text),
             color = Color.White,
             style = typography.titleLarge
         )
@@ -88,7 +92,8 @@ fun SignInBox(
                     modifier = Modifier
                         .fillMaxWidth()
                         .align(Alignment.CenterHorizontally)
-                        .padding(start = Dimension.margin_10, end = Dimension.margin_10),
+                        .padding(start = Dimension.margin_10, end = Dimension.margin_10)
+                        .testTag(TestTags.user_sign_in_email),
                     value = state.userName,
                     onValueChange = { onEmailChange(it) },
                     label = { Text(text = stringResource(id = R.string.user_name)) }
@@ -101,7 +106,8 @@ fun SignInBox(
                             top = Dimension.margin_10,
                             start = Dimension.margin_10,
                             end = Dimension.margin_10
-                        ),
+                        )
+                        .testTag(TestTags.user_sign_in_password),
                     value = state.password,
                     onValueChange = { onPasswordChange(it) },
                     label = { Text(text = stringResource(R.string.password)) }
@@ -145,6 +151,7 @@ fun SignInBox(
                             .width(Dimension.width_150)
                             .height(Dimension.height_40)
                             .clickable { if (enabled) onSignInAction() }
+                            .testTag(TestTags.sign_in_button)
                     ) {
                         Text(
                             modifier = Modifier

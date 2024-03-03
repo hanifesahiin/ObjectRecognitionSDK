@@ -19,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -26,6 +27,7 @@ import com.project.h.s.objectrecognitionsdk.R
 import com.project.h.s.objectrecognitionsdk.theme.Dimension
 import com.project.h.s.objectrecognitionsdk.theme.grey
 import com.project.h.s.objectrecognitionsdk.theme.typography
+import com.project.h.s.objectrecognitionsdk.utils.TestTags
 
 @Composable
 fun CardScreen(state: ReadIdCardViewModel.UiFlow, onFinished: () -> Unit) {
@@ -38,11 +40,13 @@ fun CardScreen(state: ReadIdCardViewModel.UiFlow, onFinished: () -> Unit) {
 
         Text(
             text = stringResource(id = R.string.read_nfc),
-            modifier = Modifier.constrainAs(text) {
-                bottom.linkTo(surface.top, margin = Dimension.margin_16)
-                start.linkTo(parent.start)
-                end.linkTo(parent.end)
-            },
+            modifier = Modifier
+                .constrainAs(text) {
+                    bottom.linkTo(surface.top, margin = Dimension.margin_16)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                }
+                .testTag(TestTags.read_nfc),
             color = Color.White,
             style = typography.titleLarge
         )
@@ -65,6 +69,7 @@ fun CardScreen(state: ReadIdCardViewModel.UiFlow, onFinished: () -> Unit) {
                     .height(Dimension.height_300)
                     .background(Color.White)
                     .padding(start = Dimension.margin_20)
+                    .testTag(TestTags.white_card_container)
             ) {
                 Spacer(modifier = Modifier.height(Dimension.margin_30))
 
@@ -88,7 +93,8 @@ fun CardScreen(state: ReadIdCardViewModel.UiFlow, onFinished: () -> Unit) {
                     top.linkTo(surface.bottom, margin = Dimension.margin_20)
                     start.linkTo(surface.start)
                     end.linkTo(surface.end)
-                },
+                }
+                .testTag(TestTags.complete_button),
             text = {
                 Text(
                     text = stringResource(id = R.string.complete),
@@ -115,7 +121,7 @@ fun CardScreen(state: ReadIdCardViewModel.UiFlow, onFinished: () -> Unit) {
                         end.linkTo(button.end)
                     },
                 text = state.alertMessage,
-                style = typography.bodyMedium
+                style = typography.labelSmall
             )
         }
     }

@@ -32,6 +32,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -43,6 +44,7 @@ import com.project.h.s.objectrecognitionsdk.theme.Dimension
 import com.project.h.s.objectrecognitionsdk.theme.ROUND_20
 import com.project.h.s.objectrecognitionsdk.theme.greyExtraLight
 import com.project.h.s.objectrecognitionsdk.theme.typography
+import com.project.h.s.objectrecognitionsdk.utils.TestTags
 
 @Composable
 fun CameraScreen(
@@ -55,6 +57,7 @@ fun CameraScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.Black)
+            .testTag(TestTags.camera_screen_component)
     ) {
         AndroidViewCapture(progressIndicator, capturedImage)
         ProcessedObject(progressedImage, processedResult)
@@ -66,7 +69,8 @@ fun PermissionScreen(requestPermission: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(Dimension.margin_20),
+            .padding(Dimension.margin_20)
+            .testTag(TestTags.camera_permission_screen_component),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -96,6 +100,7 @@ fun AndroidViewCapture(progressIndicator: Boolean, capturedImage: (Bitmap) -> Un
             )
             .fillMaxSize()
             .background(Color.Black)
+            .testTag(TestTags.android_view_capture)
     ) {
         AndroidView(
             modifier = Modifier
@@ -116,7 +121,8 @@ fun AndroidViewCapture(progressIndicator: Boolean, capturedImage: (Bitmap) -> Un
                 .width(Dimension.width_150)
                 .height(Dimension.height_60)
                 .align(Alignment.TopEnd)
-                .padding(top = Dimension.margin_15, end = Dimension.margin_20),
+                .padding(top = Dimension.margin_15, end = Dimension.margin_20)
+                .testTag(TestTags.complete_button),
             text = {
                 Text(
                     text = stringResource(id = R.string.complete),
@@ -161,6 +167,7 @@ fun ProcessedObject(progressedImage: Bitmap?, processedResult: String) {
                 end = Dimension.margin_20
             )
             .background(greyExtraLight)
+            .testTag(TestTags.processed_object)
     ) {
         Text(
             modifier = Modifier.align(Alignment.Center),
@@ -177,6 +184,7 @@ fun ProcessedObject(progressedImage: Bitmap?, processedResult: String) {
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .fillMaxSize()
+                    .testTag(TestTags.processed_image)
             )
             Text(
                 modifier = Modifier.align(Alignment.BottomCenter),

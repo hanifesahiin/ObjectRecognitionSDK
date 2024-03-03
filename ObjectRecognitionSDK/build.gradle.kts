@@ -12,7 +12,7 @@ android {
     defaultConfig {
         minSdk = 23
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.project.h.s.objectrecognitionsdk.HiltTestRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
 
@@ -100,4 +100,29 @@ dependencies {
 
     implementation("org.tensorflow:tensorflow-lite:2.8.0")
     implementation("org.tensorflow:tensorflow-lite-select-tf-ops:2.3.0")
+
+    testImplementation("com.google.dagger:hilt-android-testing:2.48")
+    kaptTest("com.google.dagger:hilt-android-compiler:2.48")
+    testAnnotationProcessor("com.google.dagger:hilt-android-compiler:2.48")
+
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.48")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.48")
+    androidTestAnnotationProcessor("com.google.dagger:hilt-android-compiler:2.48")
+
+    androidTestImplementation("androidx.test:rules:1.5.0")
+    androidTestImplementation("org.mockito.kotlin:mockito-kotlin:4.1.0")
+    androidTestImplementation("org.mockito:mockito-android:5.0.0")
+
+    androidTestImplementation("androidx.test:core:1.5.0")
+    androidTestImplementation("androidx.test:core-ktx:1.5.0")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.ext:junit-ktx:1.1.5")
+    androidTestImplementation("androidx.test.ext:truth:1.5.0")
+    androidTestImplementation("androidx.test:runner:1.5.2")
+    androidTestUtil("androidx.test:orchestrator:1.4.2")
+
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1")
+    testImplementation("org.mockito:mockito-inline:5.0.0")
+    testImplementation("org.mockito:mockito-core:4.0.0")
 }
