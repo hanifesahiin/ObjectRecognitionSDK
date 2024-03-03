@@ -20,7 +20,6 @@ import org.mockito.Mockito
 class LoginUseCaseTest {
     @Test
     fun `test sign in success process`() = runTest {
-
         val apiCallRepository: ApiCallRepository = Mockito.mock(ApiCallRepository::class.java)
         val successLoginUserModel = LoginUserModel(
             userName = "Michael",
@@ -38,7 +37,8 @@ class LoginUseCaseTest {
         val actual = loginUseCase.invoke(successLoginUserModel).single()
 
         Assert.assertEquals(
-            actual, ApiResponse.success(
+            actual,
+            ApiResponse.success(
                 LoginSuccess(
                     message = "message",
                     token = "token"
@@ -66,7 +66,8 @@ class LoginUseCaseTest {
         val actual = loginUseCase.invoke(failLoginUserModel).single()
 
         Assert.assertEquals(
-            actual, ApiResponse.error<String>("sign in" + ": " + "invalid")
+            actual,
+            ApiResponse.error<String>("sign in" + ": " + "invalid")
         )
     }
 

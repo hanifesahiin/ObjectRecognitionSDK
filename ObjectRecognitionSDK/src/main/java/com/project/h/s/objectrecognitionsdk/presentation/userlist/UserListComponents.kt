@@ -98,9 +98,11 @@ fun UserListContainer(
         }
 
         if (progressIndicator) {
-            CircularProgressIndicator(modifier = Modifier.constrainAs(progress) {
-                centerTo(surface)
-            })
+            CircularProgressIndicator(
+                modifier = Modifier.constrainAs(progress) {
+                    centerTo(surface)
+                }
+            )
         }
     }
 }

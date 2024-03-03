@@ -17,6 +17,5 @@ class FakeMobileNetV1ModelImpl : MobileNetV1Model {
         )
     }
 
-    override fun closeModel() {
-    }
+    override fun closeModel() {}
 }
