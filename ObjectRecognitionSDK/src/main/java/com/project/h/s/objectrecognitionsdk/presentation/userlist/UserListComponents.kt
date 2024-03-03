@@ -24,6 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -36,6 +37,7 @@ import com.project.h.s.objectrecognitionsdk.theme.Dimension
 import com.project.h.s.objectrecognitionsdk.theme.green
 import com.project.h.s.objectrecognitionsdk.theme.grey
 import com.project.h.s.objectrecognitionsdk.theme.typography
+import com.project.h.s.objectrecognitionsdk.utils.TestTags
 
 @Composable
 fun UserListContainer(
@@ -57,7 +59,8 @@ fun UserListContainer(
                 .constrainAs(text) {
                     bottom.linkTo(surface.top, margin = Dimension.margin_16)
                 }
-                .padding(start = Dimension.margin_10, end = Dimension.margin_10),
+                .padding(start = Dimension.margin_10, end = Dimension.margin_10)
+                .testTag(TestTags.users_waiting_for_approval),
             textAlign = TextAlign.Center,
             color = Color.White,
             style = typography.titleLarge
@@ -82,7 +85,8 @@ fun UserListContainer(
                 modifier = Modifier
                     .height(Dimension.height_300)
                     .fillMaxWidth()
-                    .background(Color.White),
+                    .background(Color.White)
+                    .testTag(TestTags.user_list_lazy_column),
                 state = listState
             ) {
                 items(list) { item ->
@@ -94,9 +98,11 @@ fun UserListContainer(
         }
 
         if (progressIndicator) {
-            CircularProgressIndicator(modifier = Modifier.constrainAs(progress) {
-                centerTo(surface)
-            })
+            CircularProgressIndicator(
+                modifier = Modifier.constrainAs(progress) {
+                    centerTo(surface)
+                }
+            )
         }
     }
 }
@@ -124,6 +130,7 @@ fun ListItem(item: UserItem, onClick: (Int) -> Unit) {
                     top.linkTo(parent.top)
                     bottom.linkTo(parent.bottom)
                 }
+                .testTag(TestTags.user_list_item)
         ) {
             Text(
                 modifier = Modifier
@@ -145,7 +152,8 @@ fun ListItem(item: UserItem, onClick: (Int) -> Unit) {
                     end.linkTo(parent.end)
                     top.linkTo(parent.top)
                     bottom.linkTo(parent.bottom, margin = Dimension.margin_10)
-                },
+                }
+                .testTag(TestTags.confirm_button),
             shape = RoundedCornerShape(10),
             colors = ButtonDefaults.buttonColors(containerColor = green)
         ) {

@@ -15,8 +15,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import com.project.h.s.objectrecognitionsdk.theme.Dimension
+import com.project.h.s.objectrecognitionsdk.utils.TestTags
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -93,7 +95,8 @@ fun SignInScreen(
                 Text(
                     modifier = Modifier
                         .align(Alignment.BottomCenter)
-                        .padding(bottom = Dimension.margin_20),
+                        .padding(bottom = Dimension.margin_20)
+                        .testTag(TestTags.sign_in_error),
                     text = state.value.errorMessage
                 )
 
