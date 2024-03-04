@@ -82,6 +82,16 @@ fun CardScreen(state: ReadIdCardViewModel.UiFlow, onFinished: () -> Unit) {
                     text = String.format(stringResource(id = R.string.soyad), state.lastName),
                     style = typography.bodyMedium
                 )
+                Spacer(modifier = Modifier.height(Dimension.margin_5))
+                Text(
+                    text = String.format(stringResource(id = R.string.date), state.date),
+                    style = typography.bodyMedium
+                )
+                Spacer(modifier = Modifier.height(Dimension.margin_5))
+                Text(
+                    text = String.format(stringResource(id = R.string.expired_date), state.expiredDate),
+                    style = typography.bodyMedium
+                )
             }
         }
 

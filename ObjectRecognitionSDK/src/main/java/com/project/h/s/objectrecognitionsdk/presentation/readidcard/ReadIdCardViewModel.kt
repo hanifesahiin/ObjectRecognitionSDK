@@ -23,7 +23,12 @@ class ReadIdCardViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             val response = nfcReaderUseCase.invoke(tag)
             _uiFlow.update {
-                it.copy(name = response.name, lastName = response.lastName)
+                it.copy(
+                    name = response.name,
+                    lastName = response.lastName,
+                    date = response.date,
+                    expiredDate = response.expiredDate
+                )
             }
         }
     }
@@ -41,8 +46,10 @@ class ReadIdCardViewModel @Inject constructor(
     }
 
     data class UiFlow(
-        val name: String = "hanife",
-        val lastName: String = "şahin",
+        val name: String = "",
+        val lastName: String = "",
+        val date: String = "",
+        val expiredDate: String = "",
         val alert: Boolean = false,
         val alertMessage: String = ""
     )
