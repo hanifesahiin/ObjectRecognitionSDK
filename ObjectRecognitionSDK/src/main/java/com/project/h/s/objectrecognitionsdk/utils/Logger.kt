@@ -11,4 +11,10 @@ object Logger {
             "SDK $objectName Class \nmethod: $methodName \nexception: ${exception.cause} \nmessage: ${exception.message}"
         )
     }
+    fun e(objectName: String, methodName: String, message: String) {
+        Log.e(
+            Logger,
+            "SDK $objectName Class \nmethod: $methodName \nmessage: ${message}"
+        )
+    }
 }

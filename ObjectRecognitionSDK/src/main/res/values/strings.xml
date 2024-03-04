@@ -11,6 +11,8 @@
     <string name="read_nfc">NFC OKUT</string>
     <string name="ad">Ad: %s</string>
     <string name="soyad">Soyad: %s</string>
+    <string name="date">Doğum Tarihi: %s</string>
+    <string name="expired_date">Geçerlilik Tarihi: %s</string>
     <string name="user_camera_description">Uygulamanın temel fonksiyonlarından camerayı kullanmak için izni onaylayın</string>
     <string name="camera">Camera</string>
     <string name="allow">İzin ver</string>

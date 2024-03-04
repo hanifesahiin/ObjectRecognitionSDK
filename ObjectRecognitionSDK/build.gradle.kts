@@ -101,6 +101,10 @@ dependencies {
     implementation("org.tensorflow:tensorflow-lite:2.8.0")
     implementation("org.tensorflow:tensorflow-lite-select-tf-ops:2.3.0")
 
+    implementation("org.jmrtd:jmrtd:0.7.18")
+    implementation("net.sf.scuba:scuba-sc-android:0.0.18")
+    implementation("com.madgag.spongycastle:prov:1.54.0.0")
+
     testImplementation("com.google.dagger:hilt-android-testing:2.48")
     kaptTest("com.google.dagger:hilt-android-compiler:2.48")
     testAnnotationProcessor("com.google.dagger:hilt-android-compiler:2.48")
