@@ -29,6 +29,8 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.project.h.s.objectrecognitionsdk.R
@@ -51,6 +53,7 @@ fun SignInBox(
         modifier = Modifier
             .fillMaxSize()
             .background(grey)
+            .testTag(TestTags.card_screen_container)
     ) {
         val (surface, text) = createRefs()
 
@@ -93,7 +96,8 @@ fun SignInBox(
                         .fillMaxWidth()
                         .align(Alignment.CenterHorizontally)
                         .padding(start = Dimension.margin_10, end = Dimension.margin_10)
-                        .testTag(TestTags.user_sign_in_email),
+                        .testTag(TestTags.user_sign_in_email)
+                        .semantics { contentDescription = "Kullanıcı Adı" },
                     value = state.userName,
                     onValueChange = { onEmailChange(it) },
                     label = { Text(text = stringResource(id = R.string.user_name)) }

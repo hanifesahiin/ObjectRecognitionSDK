@@ -118,6 +118,7 @@ fun ListItem(item: UserItem, onClick: (Int) -> Unit) {
                 start = Dimension.margin_15,
                 end = Dimension.margin_20
             )
+            .testTag(TestTags.user_list_item)
     ) {
         val (textId, button, line) = createRefs()
 
@@ -130,7 +131,6 @@ fun ListItem(item: UserItem, onClick: (Int) -> Unit) {
                     top.linkTo(parent.top)
                     bottom.linkTo(parent.bottom)
                 }
-                .testTag(TestTags.user_list_item)
         ) {
             Text(
                 modifier = Modifier

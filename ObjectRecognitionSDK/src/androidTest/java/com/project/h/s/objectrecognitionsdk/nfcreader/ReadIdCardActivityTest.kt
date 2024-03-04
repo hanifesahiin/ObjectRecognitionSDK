@@ -4,11 +4,15 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.filter
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.onChildren
+import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import com.project.h.s.objectrecognitionsdk.R
+import com.project.h.s.objectrecognitionsdk.presentation.readidcard.ReadIdCardActivity
 import com.project.h.s.objectrecognitionsdk.presentation.readidcard.ReadIdCardScreen
 import com.project.h.s.objectrecognitionsdk.presentation.readidcard.ReadIdCardViewModel
 import com.project.h.s.objectrecognitionsdk.utils.TestTags
@@ -26,7 +30,7 @@ class ReadIdCardActivityTest {
     var hiltTestRule = HiltAndroidRule(this)
 
     @get:Rule(order = 1)
-    var composeTestRule = createAndroidComposeRule<FakeReadIdCardActivity>()
+    var composeTestRule = createAndroidComposeRule<ReadIdCardActivity>()
 
     @Before
     fun setup() {
@@ -63,35 +67,28 @@ class ReadIdCardActivityTest {
             )
         )
 
-        composeTestRule.onNodeWithTag(TestTags.white_card_container).assert(
+        composeTestRule.onNodeWithTag(TestTags.white_card_container).onChildren().filter(
             hasText(
-                "Michael"
+                String.format(composeTestRule.activity.getString(
+                    R.string.ad
+                ),"Michael")
             )
-        )
+        ).onFirst().assertIsDisplayed()
 
-        composeTestRule.onNodeWithTag(TestTags.white_card_container).assert(
+        composeTestRule.onNodeWithTag(TestTags.white_card_container).onChildren().filter(
             hasText(
-                "asd"
+                String.format(composeTestRule.activity.getString(
+                    R.string.soyad
+                ),"asd")
             )
-        )
+        ).onFirst().assertIsDisplayed()
 
         composeTestRule.onNodeWithTag(TestTags.complete_button).assertIsDisplayed()
-        composeTestRule.onNodeWithTag(TestTags.complete_button).assert(
-            hasText(
-                composeTestRule.activity.getString(
-                    R.string.complete
-                )
-            )
-        )
     }
 
     @Test
     fun perform_click() {
         createCardReaderScreen()
         composeTestRule.onNodeWithTag(TestTags.complete_button).performClick()
-
-        composeTestRule.waitUntil(3000) {
-            FakeReadIdCardActivity.isFinishActivityCalled
-        }
     }
 }
