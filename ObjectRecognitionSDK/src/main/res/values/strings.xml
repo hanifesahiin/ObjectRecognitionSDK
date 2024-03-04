@@ -1,0 +1,23 @@
+<resources>
+    <string name="user_sign_in">KULLANICI GİRİŞİ</string>
+    <string name="user_name">Kullanıcı Adı</string>
+    <string name="password">Şifre</string>
+    <string name="sign_in">Giriş Yap</string>
+    <string name="confirm">Onayla</string>
+    <string name="users_waiting_for_approval">Onay Bekleyen Kullanıcılar</string>
+    <string name="sign_in_error_message">Bir hata ile karşılaşıldı</string>
+    <string name="logout">Çıkış</string>
+    <string name="complete">Bitir</string>
+    <string name="read_nfc">NFC OKUT</string>
+    <string name="ad">Ad: %s</string>
+    <string name="soyad">Soyad: %s</string>
+    <string name="date">Doğum Tarihi: %s</string>
+    <string name="expired_date">Geçerlilik Tarihi: %s</string>
+    <string name="user_camera_description">Uygulamanın temel fonksiyonlarından camerayı kullanmak için izni onaylayın</string>
+    <string name="camera">Camera</string>
+    <string name="allow">İzin ver</string>
+    <string name="captured_object">Yakalanan Obje</string>
+    <string name="NFC_not_found">NFC özelliği etkin değil veya cihazda NFC donanımı yok</string>
+    <string name="tag_null">Tag Null</string>
+    <string name="NFC_found">NFC özelliği etkindir, işlemlere devam edebilirsiniz</string>
+</resources>
