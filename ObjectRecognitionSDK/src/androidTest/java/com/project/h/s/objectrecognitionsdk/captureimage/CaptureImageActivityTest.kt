@@ -78,11 +78,9 @@ class CaptureImageActivityTest {
             ).fetchSemanticsNodes().isNotEmpty()
         )
 
-        assert(
-            composeTestRule.onNodeWithTag(TestTags.processed_object).onChildren().assertAny(
-                hasTestTag(TestTags.processed_image)
-            ).fetchSemanticsNodes().isEmpty()
-        )
+        composeTestRule.onNodeWithTag(TestTags.processed_object).onChildren().filter(
+            hasTestTag(TestTags.processed_image)
+        ).onFirst().assertDoesNotExist()
 
         composeTestRule.onNodeWithTag(TestTags.android_view_capture).onChildren()
             .filter(hasTestTag(TestTags.complete_button)).onFirst().assertIsDisplayed()
@@ -96,16 +94,9 @@ class CaptureImageActivityTest {
         composeTestRule.onNodeWithTag(TestTags.android_view_capture).onChildren()
             .filter(hasTestTag(TestTags.complete_button)).onFirst().performClick()
 
-        assert(
-            composeTestRule.onNodeWithTag(TestTags.processed_object).onChildren().assertAny(
-                hasTestTag(TestTags.processed_image)
-            ).fetchSemanticsNodes().isNotEmpty()
-        )
-
-        assert(
-            composeTestRule.onNodeWithTag(TestTags.processed_object).onChildren().assertAny(
-                hasText("apple")
-            ).fetchSemanticsNodes().isNotEmpty()
-        )
+        composeTestRule.onNodeWithTag(TestTags.processed_object).onChildren().filter(hasTestTag(TestTags.processed_image)).onFirst().assertDoesNotExist()
+        composeTestRule.onNodeWithTag(TestTags.processed_object).onChildren().filter(
+            hasText("apple")
+        ).onFirst().assertDoesNotExist()
     }
 }

@@ -35,6 +35,7 @@ fun CardScreen(state: ReadIdCardViewModel.UiFlow, onFinished: () -> Unit) {
         modifier = Modifier
             .fillMaxSize()
             .background(grey)
+            .testTag(TestTags.card_screen_container)
     ) {
         val (surface, text, button, alert) = createRefs()
 

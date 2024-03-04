@@ -5,6 +5,7 @@ import androidx.activity.viewModels
 import androidx.compose.ui.test.assertAny
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertTextEquals
+import androidx.compose.ui.test.filter
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
@@ -19,6 +20,7 @@ import com.project.h.s.objectrecognitionsdk.utils.TestTags
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.flow.StateFlow
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -67,7 +69,7 @@ class UserListActivityTest {
         )
 
         composeTestRule.onNodeWithTag(TestTags.user_list_lazy_column).assertIsDisplayed()
-        composeTestRule.onNodeWithTag(TestTags.user_list_item).assertDoesNotExist()
+        composeTestRule.onNodeWithTag(TestTags.user_list_item).assertIsDisplayed()
     }
 
     @Test
@@ -80,15 +82,9 @@ class UserListActivityTest {
 
         val text = "1 Michael michael@mailinator.com"
         composeTestRule.onNodeWithTag(TestTags.user_list_item).onChildren().assertAny(hasText(text))
-        composeTestRule.onNodeWithTag(TestTags.user_list_item).onChildren()
-            .assertAny(hasTestTag(TestTags.confirm_button))
-        composeTestRule.onNodeWithTag(TestTags.confirm_button).onChildren().assertAny(
-            hasText(
-                composeTestRule.activity.getString(
-                    R.string.confirm
-                )
-            )
-        )
+        val size = composeTestRule.onNodeWithTag(TestTags.user_list_item).onChildren()
+            .filter(hasTestTag(TestTags.confirm_button)).fetchSemanticsNodes().size
+        Assert.assertEquals(1, size)
     }
 
     @Test

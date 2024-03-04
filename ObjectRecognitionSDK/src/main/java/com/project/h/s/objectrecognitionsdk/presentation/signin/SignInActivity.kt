@@ -74,7 +74,7 @@ fun SignInScreen(
     }
 
     Surface {
-        Box(modifier = Modifier.fillMaxSize()) {
+        Box(modifier = Modifier.fillMaxSize().testTag(TestTags.sign_in_container)) {
             SignInBox(
                 state = state.value,
                 onCheckedChange = {
