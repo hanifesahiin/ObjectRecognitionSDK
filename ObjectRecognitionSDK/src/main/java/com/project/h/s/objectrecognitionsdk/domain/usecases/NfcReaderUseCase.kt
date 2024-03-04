@@ -2,19 +2,10 @@ package com.project.h.s.objectrecognitionsdk.domain.usecases
 
 import android.nfc.Tag
 import android.nfc.tech.IsoDep
-import android.util.Log
 import com.project.h.s.objectrecognitionsdk.domain.entities.NfcReaderResponse
 import com.project.h.s.objectrecognitionsdk.utils.Logger
 import kotlinx.coroutines.suspendCancellableCoroutine
-import net.sf.scuba.smartcards.CardService
-import org.jmrtd.BACKey
-import org.jmrtd.BACKeySpec
-import org.jmrtd.PassportService
-import org.jmrtd.lds.CardAccessFile
-import org.jmrtd.lds.PACEInfo
-import org.jmrtd.lds.SecurityInfo
 import org.jmrtd.lds.icao.DG1File
-import java.io.IOException
 import javax.inject.Inject
 import kotlin.coroutines.resume
 
@@ -30,7 +21,7 @@ class NfcReaderUseCase @Inject constructor() {
                     val isoDep = IsoDep.get(tag)
 
                     if (isoDep != null) {
-                        try {
+                        /*try {
                             isoDep.timeout = 10000
                             val cardService = CardService.getInstance(isoDep)
                             cardService.open()
@@ -46,7 +37,7 @@ class NfcReaderUseCase @Inject constructor() {
 
                             var paceSucceeded = false
                             try {
-                                /*
+
                                 val bacKey: BACKeySpec = BACKey("A35V49275", "930227", "320426")
                                 val cardAccessFile =
                                      CardAccessFile(service.getInputStream(PassportService.EF_CARD_ACCESS))
@@ -79,16 +70,11 @@ class NfcReaderUseCase @Inject constructor() {
                                      lastName = mrzInfo.primaryIdentifier.replace("<", " "),
                                      date = mrzInfo.dateOfBirth,
                                      expiredDate = mrzInfo.dateOfExpiry
-                                 )*/
-
-                                continuation.resume(
-                                    NfcReaderResponse(
-                                        name = "Experimental",
-                                        lastName = "NfcReaderResponse",
-                                        date = "04.03.2024",
-                                        expiredDate = "29.03.2024"
-                                    )
+                                 )
+                                  continuation.resume(
+                                   response
                                 )
+
                             } catch (e: Exception) {
                                 Logger.e(_nfcReaderUseCaseClass, "invoke CardAccess", e)
                             }
@@ -100,7 +86,15 @@ class NfcReaderUseCase @Inject constructor() {
                             } catch (e: IOException) {
                                 Logger.e(_nfcReaderUseCaseClass, "isoDep close", e)
                             }
-                        }
+                        }*/
+                        continuation.resume(
+                            NfcReaderResponse(
+                                name = "Experimental",
+                                lastName = "NfcReaderResponse",
+                                date = "04.03.2024",
+                                expiredDate = "29.03.2024"
+                            )
+                        )
                     } else {
                         Logger.e(
                             _nfcReaderUseCaseClass,

@@ -1,4 +1,4 @@
-package com.project.h.s.objectrecognitionsdkapplication
+package com.project.h.s.objectrecognitionsdkapplication.presentation
 
 import android.content.res.Configuration
 import android.os.Bundle

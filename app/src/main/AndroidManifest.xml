@@ -14,7 +14,7 @@
         android:theme="@style/Theme.ObjectRecognitionSDKApplication"
         tools:targetApi="31" >
         <activity
-            android:name="com.project.h.s.objectrecognitionsdkapplication.ObjectRecognitionSDKActivity"
+            android:name="com.project.h.s.objectrecognitionsdkapplication.presentation.ObjectRecognitionSDKActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.ObjectRecognitionSDKApplication" >
